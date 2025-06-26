@@ -46,7 +46,7 @@ background: url("{% static 'ALL.png' %}") center/cover no-repeat fixed;
     <div style="background-color:#f7541c; padding: 20px; border-radius: 10px;">
         <form action="{% url 'addexamhalls' %}" method="post" style="text-align: center;">
             {% csrf_token %}
-            <h3 style="color:#034283;">Add Exam Hall Page</h3>
+            <h3 style="color:#ffff;">Add Exam Hall Page</h3>
 
             {% if form.non_field_errors %}
             <div class="alert alert-danger my-2">

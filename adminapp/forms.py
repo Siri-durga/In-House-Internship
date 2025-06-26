@@ -148,7 +148,7 @@ class AddexamhallForm(forms.Form):
         required=True
     )
     subject2 = forms.CharField(
-        label='Subject 2 (optional)',
+        label='Subject 2',
         max_length=120,
         widget=forms.TextInput(attrs={'class': 'form-control',
                                       'placeholder': 'Subject 2'}),
@@ -162,7 +162,7 @@ class AddexamhallForm(forms.Form):
         required=True
     )
     noofbenches = forms.IntegerField(
-        label="Benches",
+        label="No.of Benches per room",
         widget=forms.NumberInput(attrs={'class': 'form-control', 'min': 1}),
         validators=[MinValueValidator(1)],
         required=True
