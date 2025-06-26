@@ -1,0 +1,70 @@
+{% extends "staffhome.html" %}
+{% load static %}
+{% block body_background %}
+background: url("{% static 'ALL.png' %}") center/cover no-repeat fixed;
+{% endblock %}
+
+{% block content %}
+
+<style>
+    /* Stronger selector using table thead th */
+    table thead th {
+        background-color: #ef591a !important;
+        color: white !important;
+        font-weight: bold;
+        padding: 12px;
+        text-align: left;
+    }
+
+    table {
+        font-family: Arial, sans-serif;
+        border-collapse: collapse;
+        width: 100%;
+        border-radius: 8px;
+        overflow: hidden;
+        background-color: #f9f9f9;
+        color: #333;
+    }
+
+    td {
+        border: 1px solid #ccc;
+        padding: 10px;
+        text-align: left;
+    }
+
+    tr:nth-child(even) {
+        background-color: #f2f2f2;
+    }
+
+    tr:hover {
+        background-color: #cce6ff;
+    }
+</style>
+
+
+
+<!-- Table container -->
+<div class="table-responsive">
+    <table class="table table-bordered table-hover">
+        <thead>
+            <tr>
+                <th>Subject</th>
+                <th>CSE A Faculty</th>
+                <th>CSE B Faculty</th>
+                <th>CSE C Faculty</th>
+            </tr>
+        </thead>
+        <tbody>
+            {% for entry in dc %}
+            <tr>
+                <td>{{ entry.subject }}</td>
+                <td>{{ entry.iv_cse_a_faculty }}</td>
+                <td>{{ entry.iv_cse_b_faculty }}</td>
+                <td>{{ entry.iv_cse_c_faculty }}</td>
+            </tr>
+            {% endfor %}
+        </tbody>
+    </table>
+</div>
+
+{% endblock %}

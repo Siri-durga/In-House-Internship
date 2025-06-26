@@ -1,0 +1,81 @@
+{% extends "adminhome.html" %}
+{% load static %}
+
+{# ✅ 1. Override background here, not inside content block #}
+{% block body_background %}
+background: url("{% static 'ALL.png' %}") center/cover no-repeat fixed;
+{% endblock %}
+
+{% block content %}
+<style>
+    body {
+        background-color:#fff;  /* changes full page bg */
+    }
+
+    .view-students-wrapper {
+        margin-top: 6rem;
+        padding: 2rem;
+        background-color: #fff; /* white, you can change this */
+        border-radius: 12px;
+        box-shadow: 0 0 12px rgba(0, 0, 0, 0.1);
+    }
+
+    table {
+        width: 100%;
+        border-collapse: collapse;
+        font-family: Arial, sans-serif;
+    }
+
+    th, td {
+        border: 1px solid #dddddd;
+        padding: 8px;
+        text-align: left;
+    }
+
+    th {
+        background-color: #ef591a;
+        color: white;
+    }
+
+    tr:nth-child(even) {
+        background-color: #f2f2f2;
+    }
+
+    tr:hover {
+        background-color: #f5f5f5;
+    }
+</style>
+
+
+<!-- ✅ NORMAL div instead of card-img-overlay -->
+<div class="view-students-wrapper">
+    <table>
+        <thead>
+            <tr>
+                <th>Student Name</th>
+                <th>Roll Number</th>
+                <th>Department</th>
+                <th>Email</th>
+                <th>Contact</th>
+                <th>Year</th>
+                <th>Semester</th>
+                <th>Delete</th>
+            </tr>
+        </thead>
+        <tbody>
+        {% for student in all_students %}
+            <tr>
+                <td>{{ student.name }}</td>
+                <td>{{ student.rollnumber }}</td>
+                <td>{{ student.department }}</td>
+                <td>{{ student.rollnumber }}@aec.edu.in</td>
+                <td>{{ student.contact }}</td>
+                <td>{{ student.year }}</td>
+                <td>{{ student.semester }}</td>
+                <td><a href="{% url 'delete' student.id %}" class="btn btn-danger btn-sm">Delete</a></td>
+            </tr>
+        {% endfor %}
+        </tbody>
+    </table>
+</div>
+{% endblock %}

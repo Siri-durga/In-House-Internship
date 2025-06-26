@@ -1,0 +1,145 @@
+{% extends "adminhome.html" %}
+{% load static %}
+{% block extra_css %}
+<style>
+    .glass-navbar {
+        position: sticky;
+        top: 0;
+        z-index: 3000;
+    }
+
+    .card-img { z-index: 10; }
+
+    .card-img-overlay {
+        position: absolute;
+        inset: 0;
+        display: flex;
+        justify-content: center;
+        align-items: center;
+        z-index: 100;
+        pointer-events: none;
+    }
+
+    .card-img-overlay * {
+        pointer-events: auto;
+    }
+</style>
+{% endblock %}
+
+{% block body_background %}
+background: url("{% static 'ALL.png' %}") center/cover no-repeat fixed;
+{% endblock %}
+
+{% block content %}
+<div class="card-img-overlay">
+
+    {% if messages %}
+    <ul class="messages">
+        {% for message in messages %}
+        <div class="alert alert-{{ message.tags }}" role="alert">
+            {{ message }}
+        </div>
+        {% endfor %}
+    </ul>
+    {% endif %}
+
+    <div style="background-color:#f7541c; padding: 20px; border-radius: 10px;">
+        <form action="{% url 'addexamhalls' %}" method="post" style="text-align: center;">
+            {% csrf_token %}
+            <h3 style="color:#034283;">Add Exam Hall Page</h3>
+
+            {% if form.non_field_errors %}
+            <div class="alert alert-danger my-2">
+                {% for error in form.non_field_errors %}
+                    {{ error }}
+                {% endfor %}
+                <button type="button" class="btn-close" data-bs-dismiss="alert"></button>
+            </div>
+            {% endif %}
+
+            <div class="row">
+                <!-- Left Column -->
+                <div class="col-md-6">
+
+                    <div class="mb-3">
+                        {{ form.Date.label_tag }}
+                        {{ form.Date }}
+                        {% if form.Date.errors %}
+                        <div class="alert alert-danger my-2">{{ form.Date.errors }}</div>
+                        {% endif %}
+                    </div>
+
+                    <div class="mb-3">
+                        {{ form.noofrooms.label_tag }}
+                        {{ form.noofrooms }}
+                        {% if form.noofrooms.errors %}
+                        <div class="alert alert-danger my-2">{{ form.noofrooms.errors }}</div>
+                        {% endif %}
+                    </div>
+
+                    <div class="mb-3">
+                        <label class="d-block mb-2 text-white">Select Rooms:</label>
+                        {% for checkbox in form.rooms %}
+                        <div class="form-check form-check-inline">
+                            {{ checkbox.tag }}
+                            <label class="form-check-label ms-1">{{ checkbox.choice_label }}</label>
+                        </div>
+                        {% endfor %}
+                        {% if form.errors.rooms %}
+                        <div class="alert alert-danger my-2">
+                            {% for error in form.errors.rooms %}
+                                {{ error }}
+                            {% endfor %}
+                        </div>
+                        {% endif %}
+                    </div>
+
+                </div>
+
+                <!-- Right Column -->
+                <div class="col-md-6">
+
+                    <div class="mb-3">
+                        {{ form.noofbenches.label_tag }}
+                        {{ form.noofbenches }}
+                        {% if form.noofbenches.errors %}
+                        <div class="alert alert-danger my-2">{{ form.noofbenches.errors }}</div>
+                        {% endif %}
+                    </div>
+
+                    <div class="mb-3">
+                        <label class="text-white">Students per Bench:</label><br>
+                        <div class="form-check form-check-inline">
+                            <input class="form-check-input" type="radio" id="students_per_bench_2" name="students_per_bench" value="2" {% if form.students_per_bench.value == '2' %}checked{% endif %}>
+                            <label class="form-check-label text-white" for="students_per_bench_2">Two students per bench</label>
+                        </div>
+                        <div class="form-check form-check-inline">
+                            <input class="form-check-input" type="radio" id="students_per_bench_3" name="students_per_bench" value="3" {% if form.students_per_bench.value == '3' %}checked{% endif %}>
+                            <label class="form-check-label text-white" for="students_per_bench_3">Three students per bench</label>
+                        </div>
+                    </div>
+
+                    <div class="mb-3">
+                        {{ form.subject1.label_tag }}
+                        {{ form.subject1 }}
+                        {% if form.subject1.errors %}
+                        <div class="alert alert-danger my-2">{{ form.subject1.errors }}</div>
+                        {% endif %}
+                    </div>
+
+                    <div class="mb-3">
+                        {{ form.subject2.label_tag }}
+                        {{ form.subject2 }}
+                        {% if form.subject2.errors %}
+                        <div class="alert alert-danger my-2">{{ form.subject2.errors }}</div>
+                        {% endif %}
+                    </div>
+
+                </div>
+            </div>
+
+            <button type="submit" class="btn btn-primary" style="background-color: #034283;">Submit</button>
+        </form>
+    </div>
+</div>
+{% endblock %}

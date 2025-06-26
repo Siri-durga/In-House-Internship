@@ -1,0 +1,42 @@
+{% extends "login_base.html" %}
+{% load widget_tweaks %}
+{% load static %}
+{% block body_background %}
+background: url("{% static 'ALL.png' %}") center/cover no-repeat fixed;
+{% endblock %}
+{% block content %}
+
+
+<!--<img src="/static/4.png" class="card-img" alt="..." style="height:35rem;">-->
+<div class="card-img-overlay">
+    <center style="margin-top:6rem;">
+        <form class="form-control w-50" action="{% url 'stafflogin' %}" method="post">
+            {% csrf_token %}
+            <h2 style="color: black;">Staff Login Page</h2>
+            {% if messages %}
+            <ul class="messages">
+                {% for message in messages %}
+                <li{% if message.tags %} class="{{ message.tags }}" {% endif %}>{{ message }}</li>
+                    {% endfor %}
+            </ul>
+            {% endif %}
+            <div class="row g-3 align-items-center">
+
+                <div class="form-group">
+                    {{ form.staffemail.label_tag }}
+                    {{ form.staffemail }}
+                </div>
+                <div class="form-group">
+                    {{ form.staffpassword.label_tag }}
+                    {{ form.staffpassword }}
+                </div>
+                <div class="col-auto">
+                    <button type="submit" class="btn mb-3" style="margin-left: 17rem; background-color: #ef591a; color: white; border: none;">Login
+                    </button>
+                </div>
+            </div>
+        </form>
+
+    </center>
+</div>
+{% endblock %}

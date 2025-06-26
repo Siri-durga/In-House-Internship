@@ -1,0 +1,55 @@
+{% extends "adminhome.html" %}
+{% block content %}
+<style>
+    .add-students-container {
+        margin-top: 6rem; /* Pushes below the sticky navbar */
+        margin-bottom: 2rem;
+    }
+
+    .custom-card {
+        background-color: rgba(255, 255, 255, 0.95);
+        border-radius: 15px;
+        box-shadow: 0 0 20px rgba(0, 0, 0, 0.2);
+    }
+
+    body {
+        background-image: url("/static/4.png");
+        background-size: cover;
+        background-attachment: fixed;
+        background-repeat: no-repeat;
+        background-position: center;
+    }
+</style>
+
+<div class="container add-students-container">
+    <div class="row justify-content-center">
+        <div class="col-md-10">
+            <div class="card custom-card">
+                <div class="card-header text-white text-center" style="background-color: #ef591a;">
+                    <h3 class="mb-0">Add Students From Excel Sheet</h3>
+                </div>
+                <div class="card-body">
+                    <form action="{% url 'addstudents' %}" method="post" enctype="multipart/form-data">
+                        {% csrf_token %}
+                        {% if messages %}
+                        <div class="alert alert-dismissible fade show" role="alert">
+                            {% for message in messages %}
+                            <p class="mb-0">{{ message }}</p>
+                            {% endfor %}
+                            <button type="button" class="btn-close" data-bs-dismiss="alert" aria-label="Close"></button>
+                        </div>
+                        {% endif %}
+                        <div class="mb-3">
+                            <label for="excel_file" class="form-label">Upload Excel File:</label>
+                            <input type="file" class="form-control" id="excel_file" name="excel_file" required>
+                        </div>
+                        <div class="text-center">
+                            <button type="submit" class="btn" style="background-color: #ef591a; color: white; border: none;">Submit</button>
+                        </div>
+                    </form>
+                </div>
+            </div>
+        </div>
+    </div>
+</div>
+{% endblock %}

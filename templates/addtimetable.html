@@ -1,0 +1,85 @@
+{% extends "adminhome.html" %}
+{% load static %}
+
+{# ── 1️⃣  REPLACE the background from adminhome.html ── #}
+{% block body_background %}
+background: url("{% static 'ALL.png' %}") center/cover no-repeat fixed;
+{% endblock %}
+
+{# ── 2️⃣  PAGE‑SPECIFIC STYLES ── #}
+{% block extra_css %}
+<style>
+    .centered-wrapper {
+        min-height: 100vh;
+        display: flex;
+        justify-content: center;
+        align-items: center;
+        padding: 0;
+        margin: 0 auto;
+    }
+
+    .form-container {
+        background:#fff;
+        border-radius:15px;
+        box-shadow:0 0 15px rgba(0,0,0,.2);
+        padding:25px 30px;
+        max-width:500px;
+        width: 100%;
+        color:#333;
+        margin: 0 auto;
+    }
+
+    label {
+        font-weight: 700;
+        font-size: 16px;
+    }
+
+    input[type="text"], select {
+        width: 100%;
+        padding: 10px 15px;
+        margin: 6px 0 14px;
+        border: 1px solid #ccc;
+        border-radius: 8px;
+        background: #f8f9fa;
+    }
+
+    button[type="submit"] {
+        background: #ef591a;
+        color: #fff;
+        border: none;
+        padding: 12px 18px;
+        border-radius: 8px;
+        width: 100%;
+        font-size: 16px;
+        font-weight: 700;
+        transition: .3s;
+    }
+
+    button[type="submit"]:hover {
+        background: #ff4d4d;
+    }
+</style>
+{% endblock %}
+
+{# ── 3️⃣  PAGE CONTENT ── #}
+{% block content %}
+<div class="centered-wrapper">
+    <div class="form-container">
+        <h4 class="text-center mb-3" style="color:#ef5918">Add Time Table</h4>
+        <form method="post">
+            {% csrf_token %}
+            {{ form.as_p }}
+            <button type="submit">Submit</button>
+        </form>
+    </div>
+</div>
+{% endblock %}
+
+{% block extra_js %}
+<style>
+    main.container-fluid {
+        padding: 0 !important;
+        margin: 0 auto;
+    }
+</style>
+{% endblock %}

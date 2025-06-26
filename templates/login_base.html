@@ -1,0 +1,52 @@
+{% load static %}
+{% load widget_tweaks %}
+
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <title>{% block title %}Login | Smart Exam Seating{% endblock %}</title>
+  <meta name="viewport" content="width=device-width, initial-scale=1">
+
+  <link href="https://cdn.jsdelivr.net/npm/bootstrap@5.3.2/dist/css/bootstrap.min.css" rel="stylesheet">
+
+  <style>
+    /* 🔸 PNG background – NO video */
+    body{
+      margin:0;padding:0;
+      background:url("{% static 'ALL.png' %}") center/cover no-repeat fixed;
+      font-family:'Segoe UI',sans-serif;
+    }
+
+    /* — the same glass navbar you already use — */
+    .custom-navbar{
+      display:flex;justify-content:space-between;align-items:center;
+      width:85%;margin:20px auto;padding:10px 30px;border-radius:20px;
+      backdrop-filter:blur(10px);background:rgba(255,255,255,.30);
+      box-shadow:0 4px 12px rgba(0,0,0,.1);
+    }
+    .custom-navbar .nav-link{font-size:1.35rem;font-weight:600;letter-spacing:.5px;padding:.75rem 1.25rem;color:#003366!important}
+    .custom-navbar .nav-link.active{color:#e76020!important;font-weight:bold}
+  </style>
+</head>
+
+<body>
+  <!-- ░ Navbar copied from index.html ░ -->
+  <div class="custom-navbar">
+    <div class="d-flex align-items-center">
+      <img src="{% static 'logo.webp' %}" style="height:50px;margin-right:15px">
+      <!--<span class="fw-bold" style="color:#e76020">Aditya University</span>-->
+    </div>
+
+    <div class="d-flex">
+      <a class="nav-link {% if request.path == '/adminlogin/' %}active{% endif %}"   href="{% url 'adminlogin' %}">Admin</a>
+      <a class="nav-link {% if request.path == '/stafflogin/' %}active{% endif %}"   href="{% url 'stafflogin' %}">Staff</a>
+      <a class="nav-link {% if request.path == '/studentlogin/' %}active{% endif %}" href="{% url 'studentlogin' %}">Student</a>
+    </div>
+  </div>
+
+  {% block content %}{% endblock %}
+
+  <script src="https://cdn.jsdelivr.net/npm/bootstrap@5.3.2/dist/js/bootstrap.bundle.min.js"></script>
+</body>
+</html>

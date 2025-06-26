@@ -1,0 +1,116 @@
+{% extends "adminhome.html" %}
+{% load static %}
+
+{# ✅ 1. Override background here, not inside content block #}
+{% block body_background %}
+background: url("{% static 'ALL.png' %}") center/cover no-repeat fixed;
+{% endblock %}
+
+{% block content %}
+
+
+<style>
+    table {
+        font-family: Arial, sans-serif;
+        border-collapse: collapse;
+        width: 100%;
+        border-radius: 8px;
+        overflow: hidden;
+        background-color: #ffffff; /* White background for table */
+        color: #333;
+        margin-top: 6rem; /* Push table down below navbar */
+    }
+
+    th {
+        background-color: #ef591a;
+        color: white;
+        font-weight: bold;
+        padding: 12px;
+        text-align: left;
+    }
+
+    td {
+        background-color: #ffffff;
+        border: 1px solid #dddddd;
+        padding: 10px;
+        text-align: left;
+    }
+
+    tr:nth-child(even) {
+        background-color: #fdf0e9;
+    }
+
+    tr:hover {
+        background-color: #ffe6d1;
+    }
+
+    #buttons-container {
+        display: flex;
+        justify-content: space-around;
+        background-color: #f0f8ff;
+        padding: 20px;
+        margin-top: 2rem;
+        border-radius: 10px;
+        box-shadow: 0 4px 8px rgba(0, 0, 0, 0.1);
+    }
+
+    #buttons-container a {
+        padding: 15px 32px;
+        border: none;
+        color: white;
+        text-align: center;
+        text-decoration: none;
+        display: inline-block;
+        font-size: 16px;
+        border-radius: 8px;
+        box-shadow: 0 4px 8px rgba(0, 0, 0, 0.2),
+                    0 6px 20px rgba(0, 0, 0, 0.19);
+        transition: 0.4s;
+    }
+
+    #excel-download-btn { background-color: #4CAF50; }
+    #pdf-download-btn { background-color: #f44336; }
+    #room-report-btn { background-color: #008CBA; }
+    #attendance-btn { background-color: #6f42c1; }
+
+</style>
+
+<table>
+    <tr>
+        <th>S.No</th>
+        <th>Student ID</th>
+        <th>Branch</th>
+        <th>Room No</th>
+        <th>Bench No</th>
+        <th>Seat Number</th>
+        
+        <th>Date</th>
+        <!--<th>Start Time</th>
+        <th>End Time</th>-->
+    </tr>
+    {% for student in Exam_alloted_student %}
+        {% if student.Student_Email != 'pending' %}
+            <tr>
+                <td>{{ forloop.counter }}</td>
+                <td>{{ student.Student_Id }}</td>
+                <td>{{ student.department }}</td>
+                <td>{{ student.RoomNo }}</td>
+                <td>{{ student.BenchNo }}</td>
+                <td>{{ student.SeatNumber }}</td>
+                <!--<td>{{ student.Student_Id }}</td>-->
+                <td>{{ student.date }}</td>
+                <!--<td>{{ student.starttime }}</td>
+                <td>{{ student.endtime }}</td>-->
+            </tr>
+        {% endif %}
+    {% endfor %}
+</table>
+
+<div id="buttons-container">
+    <a id="excel-download-btn" href="{% url 'download_details' %}">Download Details In Excel Format</a>
+    <a id="pdf-download-btn" href="{% url 'generate_pdf' %}">Download Department Wise Report</a>
+    <a id="room-report-btn" href="{% url 'download_room_report' %}">Download Room Wise Report</a>
+    <a id="attendance-btn" href="{% url 'download_attendance_sheet_home' %}">Download Attendance Sheet</a>
+</div>
+
+{% endblock %}

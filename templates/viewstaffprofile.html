@@ -1,0 +1,66 @@
+{% extends "staffhome.html" %}
+{% load static %}
+
+{# 1️⃣  override the STAFF‑home background #}
+{% block body_background %}
+background:url("{% static 'ALL.png' %}") center/cover no-repeat fixed;
+{% endblock %}
+
+{# 2️⃣  page‑specific CSS #}
+{% block extra_css %}
+<style>
+/* push content below sticky navbar (≈ 120 px) */
+.view-faculty-wrapper{
+    padding: 140px 20px 40px;           /* top | sides | bottom */
+    min-height: calc(100vh - 140px);
+}
+
+/* solid white cards */
+.faculty-card{
+    background:#fff;
+    border-radius:15px;
+    box-shadow:0 4px 12px rgba(0,0,0,.15);
+    margin-bottom:30px;
+    transition:transform .2s;
+}
+.faculty-card:hover{ transform:translateY(-6px); }
+
+.faculty-card-body{padding:20px;}
+.faculty-card-title{font-size:18px;font-weight:700;color:#333;margin-bottom:10px;}
+.faculty-card-details{font-size:14px;color:#555;margin-bottom:4px;}
+
+.reset-password-btn{
+    background:#ef591a;border:none;
+}
+.reset-password-btn:hover{background:#d64c0c;}
+</style>
+{% endblock %}
+
+{# 3️⃣  content: normal div wrapper instead of card‑img‑overlay #}
+{% block content %}
+<div class="view-faculty-wrapper">
+  <div class="container">
+    <div class="row justify-content-center">
+      {% for faculty in all_faculty %}
+        <div class="col-md-4 col-sm-6">
+          <div class="faculty-card">
+            <div class="faculty-card-body">
+              <h6 class="faculty-card-title">{{ faculty.name }}</h6>
+              <p class="faculty-card-details"><b>Email:</b> {{ faculty.email }}</p>
+              <p class="faculty-card-details"><b>Branch:</b> {{ faculty.branch }}</p>
+              <p class="faculty-card-details"><b>Semester:</b> {{ faculty.semester }}</p>
+              <p class="faculty-card-details"><b>Year:</b> {{ faculty.year }}</p>
+              <p class="faculty-card-details"><b>Contact:</b> {{ faculty.contact }}</p>
+              <div class="text-center mt-2">
+                <a href="{% url 'staffresetpassword' %}" class="btn btn-success reset-password-btn btn-sm">
+                  Reset Password
+                </a>
+              </div>
+            </div>
+          </div>
+        </div>
+      {% endfor %}
+    </div>
+  </div>
+</div>
+{% endblock %}

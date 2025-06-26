@@ -1,0 +1,48 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <title>Create Timetable</title>
+</head>
+<body>
+    <h1>Add Timetable</h1>
+    <form method="post">
+        {% csrf_token %}
+        <label for="slots">Slots/Periods of Study (per day):</label>
+        <input type="number" id="slots" name="slots" value="6" required><br><br>
+
+        <label for="break">Insert Break after period number (skip if no break):</label>
+        <input type="number" id="break" name="break"><br><br>
+
+        <label for="days">No. of Days (per week):</label>
+        <input type="number" id="days" name="days" value="5" required><br><br>
+
+        <label for="teachers">No. of Teachers:</label>
+        <input type="number" id="teachers" name="teachers" value="3" required><br><br>
+
+        {% for i in 1|range:teachers %}
+        <label for="teacher{{ i }}">Teacher Name {{ i }}:</label>
+        <input type="text" id="teacher{{ i }}" name="teacher{{ i }}"><br><br>
+
+        <label for="subject{{ i }}">Subject {{ i }}:</label>
+        <input type="text" id="subject{{ i }}" name="subject{{ i }}"><br><br>
+        {% endfor %}
+
+        <label for="batches">No. of Batches:</label>
+        <input type="number" id="batches" name="batches" value="2" required><br><br>
+
+        {% for i in 1|range:batches %}
+        <label for="batch{{ i }}">Batch Name {{ i }}:</label>
+        <input type="text" id="batch{{ i }}" name="batch{{ i }}"><br><br>
+
+        <label for="subjects{{ i }}">No. of Subjects for Batch {{ i }}:</label>
+        <input type="number" id="subjects{{ i }}" name="subjects{{ i }}"><br><br>
+
+        <label for="time_required{{ i }}">Time Required (hours) for Batch {{ i }}:</label>
+        <input type="number" id="time_required{{ i }}" name="time_required{{ i }}"><br><br>
+        {% endfor %}
+
+        <button type="submit">Submit</button>
+    </form>
+</body>
+</html>

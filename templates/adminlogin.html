@@ -1,0 +1,31 @@
+{#  templates/adminlogin.html  #}
+
+
+{% extends "login_base.html" %}
+{% load widget_tweaks %}
+{% load static %}
+
+{% block title %}Admin Login | Smart Exam Seating{% endblock %}
+
+{% block content %}
+<div class="d-flex justify-content-center align-items-center"
+     style="min-height:calc(100vh - 120px)">
+  <form action="{% url 'adminlogin' %}" method="post"
+        class="bg-white rounded shadow p-5"
+        style="min-width:500px; max-width:700px; width:100%;">
+    {% csrf_token %}
+    <h2 class="text-center mb-4">Admin Login Page</h2>
+
+    {% for m in messages %}
+      <div class="alert alert-{{ m.tags }}">{{ m }}</div>
+    {% endfor %}
+
+    <div class="mb-3">{{ form.adminemail.label_tag }}{{ form.adminemail|add_class:'form-control' }}</div>
+    <div class="mb-3">{{ form.adminpassword.label_tag }}{{ form.adminpassword|add_class:'form-control' }}</div>
+
+    <div class="text-center">
+      <button class="btn btn-warning px-4">Login</button>
+    </div>
+  </form>
+</div>
+{% endblock %}

@@ -1,0 +1,78 @@
+{% extends "studenthome.html" %}
+{% load static %}
+
+{# 1. override the background for this page #}
+{% block body_background %}
+background:url("{% static 'ALL.png' %}") center/cover no-repeat fixed;
+{% endblock %}
+
+{# 2. extra css just for this page #}
+{% block extra_css %}
+<style>
+/* push cards below navbar (≈ 130 px high) */
+.student-profile-wrapper{
+    padding: 130px 20px 40px;
+    min-height: calc(100vh - 130px);
+}
+
+/* solid white card, decent width */
+
+.student-card{
+    /* NEW width settings ↓ */
+    width: 90%;           /* take 80 % of the viewport / parent */
+    max-width: 900px;     /* but never grow beyond 900 px */
+
+    /* keep everything else the same */
+    background:#ffff !important;
+    border-radius:15px;
+    box-shadow:0 4px 12px rgba(0,0,0,.15);
+    margin:30px auto;     /* center horizontally */
+    padding:24px;
+    overflow:hidden;
+    position:relative;
+    z-index:1000;
+}
+
+
+
+
+
+.student-card-body{padding:24px;}
+.student-card-title{font-size:22px;font-weight:700;margin-bottom:12px;color:#333;}
+.student-card-details{font-size:15px;color:#555;margin-bottom:6px;}
+
+.reset-password-btn{
+    background:#ef591a;border:none;
+}
+.reset-password-btn:hover{background:#ef591a;}
+</style>
+{% endblock %}
+
+{# 3. main content #}
+{% block content %}
+<div class="student-profile-wrapper">
+  <div class="container">
+    <div class="row justify-content-center">
+      {% for student in student_profile %}
+        <div class="col-20">
+          <div class="student-card" style="background-color: white; padding: 20px; width:150% ; border-radius: 15px; z-index: 1000; position: relative;">
+
+            <div class="student-card-body text-center">
+              <h6 class="student-card-title"><b>Name:   </b>{{ student.name }}</h6>
+              <p class="student-card-details"><b>Email:</b> {{ student.email }}</p>
+              <p class="student-card-details"><b>Roll Number:</b> {{ student.rollnumber }}</p>
+              <p class="student-card-details"><b>Branch:</b> {{ student.department }}</p>
+              <p class="student-card-details"><b>Semester:</b> {{ student.semester }}</p>
+              <p class="student-card-details"><b>Year:</b> {{ student.year }}</p>
+              <p class="student-card-details"><b>Contact:</b> {{ student.contact }}</p>
+              <a href="{% url 'resetstudentpassword' %}" class="btn btn-success reset-password-btn mt-3">
+                  Reset Password
+              </a>
+            </div>
+          </div>
+        </div>
+      {% endfor %}
+    </div>
+  </div>
+</div>
+{% endblock %}

@@ -1,0 +1,46 @@
+{% extends "login_base.html" %}
+{% load widget_tweaks %}
+{% load static %}
+{% block body_background %}
+background: url("{% static 'ALL.png' %}") center/cover no-repeat fixed;
+{% endblock %}
+
+{% block content %}
+
+<!--img src="/static/4.png" class="card-img" alt="..." style="height:35rem;">-->
+<div class="card-img-overlay">
+    <center style="margin-top:6rem;">
+        <form class="form-control w-50" action="{% url 'studentlogin' %}" method="post">
+            {% csrf_token %}
+            <h2 style="color: black;">Student Login Page</h2>
+            {% if messages %}
+            <ul class="messages">
+                {% for message in messages %}
+                {% if message.tags == 'error' %}
+                <li>{{ message }}</li>
+                {% endif %}
+                {% endfor %}
+            </ul>
+            {% endif %}
+            <div class="row g-3 align-items-center">
+
+                <div class="form-group">
+                    {{ form.roll_number.label_tag }}
+                    {{ form.roll_number }}
+                </div>
+                <div class="form-group">
+                    {{ form.password.label_tag }}
+                    {{ form.password }}
+                </div>
+                <div class="col-auto">
+                    <button type="submit" class="btn mb-3" style="margin-left: 17rem; background-color:  #ef591a; color: white; border: none;">Login
+                    </button>
+                </div>
+            </div>
+        </form>
+
+    </center>
+</div>
+
+{% endblock %}
+

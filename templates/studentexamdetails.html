@@ -1,0 +1,76 @@
+{% extends "studenthome.html" %}
+{% load static %}
+
+{# 1. override the background for this page #}
+{% block body_background %}
+background:url("{% static 'ALL.png' %}") center/cover no-repeat fixed;
+{% endblock %}
+
+
+
+{% block content %}
+<style>
+/* Push content below sticky navbar */
+.exam-wrapper{
+    padding-top:130px;          /* below navbar */
+    padding-bottom:40px;
+    min-height:calc(100vh - 130px);
+}
+
+/* full‑width table */
+table{
+    width:110%;                /* stretch edge‑to‑edge */
+    font-family:Arial, sans-serif;
+    border-collapse:collapse;
+    background:#fff;
+    border-radius:0;           /* remove corner clipping when full width */
+    box-shadow:0 4px 6px rgba(0,0,0,.1);
+}
+
+th,td{
+    border:1px solid #ddd;
+    text-align:left;
+    padding:12px;
+    font-size:14px;
+}
+
+th{
+    background:#ef591a;
+    color:#fff;
+    font-weight:bold;
+}
+
+tr:nth-child(even){background:#f5f5f5;}
+tr:hover{background:#e7f6e7;}
+</style>
+
+<div class="exam-wrapper">
+  <!-- container‑fluid gives full viewport width -->
+  <div class="container-fluid">
+    <table>
+      <thead>
+        <tr>
+          <th>Student Room No</th>
+          <th>Bench No</th>
+          <th>Seat No</th>
+          <th>Date</th>
+          <th>Start Time</th>
+          <th>End Time</th>
+        </tr>
+      </thead>
+      <tbody>
+        {% for i in data %}
+          <tr>
+            <td>{{ i.RoomNo }}</td>
+            <td>{{ i.BenchNo }}</td>
+            <td>{{ i.SeatNumber }}</td>
+            <td>{{ i.date }}</td>
+            <td>{{ i.starttime }}</td>
+            <td>{{ i.endtime }}</td>
+          </tr>
+        {% endfor %}
+      </tbody>
+    </table>
+  </div>
+</div>
+{% endblock %}

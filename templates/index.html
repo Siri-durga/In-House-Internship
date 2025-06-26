@@ -1,0 +1,106 @@
+{% load static %}
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <title>Smart Exam Seating</title>
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+
+    <!-- Google Fonts (approximate original style) -->
+    <link href="https://fonts.googleapis.com/css2?family=Pacifico&family=Satisfy&display=swap" rel="stylesheet">
+
+    <!-- Bootstrap 5 -->
+    <link href="https://cdn.jsdelivr.net/npm/bootstrap@5.3.2/dist/css/bootstrap.min.css" rel="stylesheet">
+
+    <style>
+        /* ─── NAVBAR (unchanged) ─── */
+        .custom-navbar .nav-link{
+            font-size:1.35rem;font-weight:600;letter-spacing:.5px;padding:.75rem 1.25rem;
+        }
+        html,body{height:100%;margin:0;padding:0;font-family:'Segoe UI',sans-serif;}
+
+        /* ─── Full-screen muted video background ─── */
+        .bg-video{
+            position:fixed;top:0;left:0;width:100%;height:100%;
+            object-fit:cover;z-index:-1;
+        }
+        /* fallback image */
+        body{
+            {% block body_background %}
+            background:url("{% static 'HOME.png' %}") no-repeat center/cover fixed;
+            {% endblock %}
+        }
+
+        .custom-navbar{
+            display:flex;justify-content:space-between;align-items:center;
+            margin:20px auto;width:85%;padding:10px 30px;
+            border-radius:20px;
+            backdrop-filter:blur(10px);
+            background:rgba(255,255,255,.3);
+            box-shadow:0 4px 12px rgba(0,0,0,.1);
+        }
+        .custom-logo img{height:50px;margin-right:15px;}
+        .nav-link{color:#003366!important;font-weight:500;margin:0 12px;}
+        .nav-link.active{color:#e76020!important;font-weight:bold;}
+
+        /* ─── Heading placement & style ─── */
+        .welcome-heading{
+            position:absolute;
+            top:110px;          /* roughly just below navbar */
+            width:100%;         /* let us center things easily */
+            pointer-events:none;
+    }
+        .welcome-heading .line1{
+            margin:0 0 4px 5%;
+            font-family:'Pacifico',cursive;
+            font-size:clamp(2.5rem,4.5vw,4rem);
+            color:#e76020;
+            text-align:left;    /* keep on the left */
+        }
+        .welcome-heading .line2{
+            margin:0;
+            font-family:'Satisfy',cursive;
+            font-size:clamp(2.2rem,4vw,3.5rem);
+            color:#0b3c79;
+            text-align:center;  /* ◀︎ center on the page */
+            font-weight:700;    /* ◀︎ make it thicker */
+            letter-spacing:.5px;
+        }
+
+        /* ensure any later content can scroll */
+        main{min-height:100vh;}
+    </style>
+</head>
+<body>
+
+    <!-- ► Background video (autoplay / muted / loop) -->
+    <video class="bg-video" autoplay muted loop playsinline>
+        <source src="{% static 'my.mp4' %}" type="video/mp4">
+    </video>
+
+    <!-- NAVBAR -->
+    <div class="custom-navbar">
+        <div class="custom-logo">
+            <img src="{% static 'logo.webp' %}" alt="Logo">
+        </div>
+        <div class="d-flex">
+            <a class="nav-link" href="{% url 'adminlogin' %}">Admin</a>
+            <a class="nav-link" href="{% url 'stafflogin' %}">Staff</a>
+            <a class="nav-link" href="{% url 'studentlogin' %}">Student</a>
+        </div>
+    </div>
+
+    <!-- HEADINGS -->
+    <div class="welcome-heading">
+        <h1 class="line1">Welcome&nbsp;to</h1>
+        <h1 class="line2">Smart&nbsp;Exam&nbsp;Seating&nbsp;Allocation&nbsp;System</h1>
+    </div>
+
+    <!-- optional page body -->
+    <main>
+        {% block content %}{% endblock %}
+    </main>
+
+    <script src="https://cdn.jsdelivr.net/npm/bootstrap@5.3.2/dist/js/bootstrap.bundle.min.js"></script>
+</body>
+</html>

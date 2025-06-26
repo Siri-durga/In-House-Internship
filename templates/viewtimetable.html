@@ -1,0 +1,72 @@
+{% extends "adminhome.html" %}
+{% load static %}
+{% block body_background %}
+background: url("{% static 'ALL.png' %}") center/cover no-repeat fixed;
+{% endblock %}
+
+{% block content %}
+<style>
+    /* Style for the table */
+    table {
+        font-family: Arial, sans-serif;
+        border-collapse: collapse;
+        width: 100%;
+        border-radius: 8px;
+        overflow: hidden;
+        background-color: #f9f9f9; /* Light gray background */
+        color: #333; /* Text color */
+    }
+
+    /* Style for table header */
+    th {
+        background-color: #ef591a; /* Blue background for header */
+        color: white;
+        font-weight: bold;
+        padding: 12px;
+        text-align: left;
+    }
+
+    /* Style for table data */
+    td {
+        border: 1px solid #ccc; /* Light gray border */
+        padding: 10px;
+        text-align: left;
+    }
+
+    /* Style for alternate rows */
+    tr:nth-child(even) {
+        background-color: #f2f2f2; /* Light gray background for even rows */
+    }
+
+    /* Style for hover effect */
+    tr:hover {
+        background-color: #cce6ff; /* Light blue background on hover */
+    }
+</style>
+
+<!-- Table container -->
+<div class="table-responsive">
+   
+    <table border="1">
+        <thead>
+            <tr>
+                <th>Subject</th>
+                <th>CSE A Faculty</th>
+                <th>CSE B Faculty</th>
+                <th>CSE C Faculty</th>
+            </tr>
+        </thead>
+        <tbody>
+            {% for entry in timetable_entries %}
+            <tr>
+                <td>{{ entry.subject }}</td>
+                <td>{{ entry.iv_cse_a_faculty }}</td>
+                <td>{{ entry.iv_cse_b_faculty }}</td>
+                <td>{{ entry.iv_cse_c_faculty }}</td>
+            </tr>
+            {% endfor %}
+        </tbody>
+    </table>
+</div>
+
+{% endblock %}
