@@ -1,4 +1,4 @@
-<h4>B.Tech Final Year In-House Internship Project</h4>
+<h4>B.Tech  In-House Internship Project</h4>
 <h4>PROJECT TITLE: NEXT GENERATION APPROACH FOR EXAM HALL DISTRIBUTION THROUGH UNIQUE AND ANOMALOUS SEMANTIC TECHNIQUES</h4>
 
 <h6><strong>Problem Statement:</strong> The traditional manual exam seating arrangement process is error-prone, inefficient, and time-consuming. Issues such as data inconsistencies, tedious seat allocation, and ineffective communication systems hamper the seamless conduct of examinations. To overcome these challenges, we present a robust automated solution titled <i>"Next Generation Approach for Enhancing Exam Hall Distribution Through Unique and Anomalous Semantic Techniques."</i></h6>
